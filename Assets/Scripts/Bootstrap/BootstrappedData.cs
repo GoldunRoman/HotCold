@@ -29,8 +29,7 @@ public static class PerformBootstrap
 public class BootstrappedData : MonoBehaviour
 {
     #region Singletone
-    [Header("Scene transition data")]
-    string _sceneName;
+
 
     private static BootstrappedData _instance;
     public static BootstrappedData Instance
@@ -45,6 +44,10 @@ public class BootstrappedData : MonoBehaviour
         }
     }
     #endregion
+
+    [Header("Scene transition data")]
+    string _sceneName;
+
     private void Awake()
     {
         if(Instance != null)
