@@ -5,14 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Script References")]
     CharacterController _characterController;
     InputManager _inputManager;
+    SettingsData _bootstrappedSettingsData;
+
+    [Header("Developer Settings")]
     Transform _cameraTransform;
     Vector3 _velocity;
     bool _isGrounded;
-    [SerializeField] float _speed = 2.0f;
     [SerializeField] float _jumpHeight = 1.0f;
     [SerializeField] float _gravityValue = -9.81f;
+
+    [Header("Player Settings")]
+    [SerializeField] float _speed = 2.0f;
 
     private void Start()
     {
@@ -22,6 +28,9 @@ public class PlayerController : MonoBehaviour
         }
 
         _inputManager = InputManager.Instance;
+
+        //_bootstrappedSettingsData = BootstrappedData.Instance.GetSettingsData();
+
         _cameraTransform = Camera.main.transform;
     }
 

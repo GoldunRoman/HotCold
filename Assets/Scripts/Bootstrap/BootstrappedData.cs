@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,14 +30,12 @@ public static class PerformBootstrap
 public class BootstrappedData : MonoBehaviour
 {
     #region Singletone
-
-
     private static BootstrappedData _instance;
     public static BootstrappedData Instance
     {
         get
         {
-            if( _instance == null)
+            if (_instance == null)
             {
                 Debug.LogError("Bootstrapped Data is null.");
             }
@@ -48,9 +47,12 @@ public class BootstrappedData : MonoBehaviour
     [Header("Scene transition data")]
     string _sceneName;
 
+    [Header("Settings")]
+    SettingsData _settingsData;
+
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Debug.LogError("Found another BootstrappedData on " + gameObject.name);
         }
@@ -60,7 +62,25 @@ public class BootstrappedData : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    
+
+    #region SettingsDataOperations
+    public void InitSettings(SettingsData data)
+    {
+        _settingsData = data;
+    }
+
+    public SettingsData GetSettingsData()
+    { 
+        if(_settingsData == null)
+        {
+            throw new NullReferenceException("BootstrappedData :: GetSettingsData(). SettingsData is null");
+        }
+
+        return _settingsData;
+    }
+    #endregion
+
+    #region AsyncScenesLoadingOperations
     public void SetSceneName(string sceneToLoadName)
     {
         _sceneName = sceneToLoadName;
@@ -75,4 +95,6 @@ public class BootstrappedData : MonoBehaviour
     {
         _sceneName = null;
     }
+    #endregion
+
 }
