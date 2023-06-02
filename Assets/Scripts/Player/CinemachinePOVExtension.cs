@@ -31,7 +31,7 @@ public class CinemachinePOVExtension : CinemachineExtension
         {
             if(stage == CinemachineCore.Stage.Aim)
             {
-                Vector2 deltaInput = _inputManager.GetMouseDelta();
+                Vector2 deltaInput = _inputManager.GetTouchScreenDelta();
                 _startingRotation.x += deltaInput.x * _verticalSensivity * Time.deltaTime;
                 _startingRotation.y += deltaInput.y * _horizontalSensivity * Time.deltaTime;
                 _startingRotation.y = Mathf.Clamp(_startingRotation.y, -_clampAngle, _clampAngle);

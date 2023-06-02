@@ -10,10 +10,6 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                Debug.LogError("InputManager is null.");
-            }
             return _instance;
         }
     }
@@ -50,13 +46,18 @@ public class InputManager : MonoBehaviour
         return _playerInput.PlayerMain.Move.ReadValue<Vector2>();
     }
 
-    public Vector2 GetMouseDelta()
-    {
+    public Vector2 GetTouchScreenDelta()
+    {       
         return _playerInput.PlayerMain.Look.ReadValue<Vector2>();
     }
 
     public bool PlayerJumpedThisFrame()
     {
         return _playerInput.PlayerMain.Jump.triggered;
+    }
+
+    public bool PlayerPicksUpItem()
+    {
+        return _playerInput.PlayerMain.PickUp.triggered;
     }
 }

@@ -12,10 +12,6 @@ public class AsyncSceneLoading : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                Debug.LogError("Bootstrapped Data is null.");
-            }
             return _instance;
         }
     }
