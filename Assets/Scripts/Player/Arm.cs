@@ -18,7 +18,11 @@ public class Arm : MonoBehaviour
     [Header("Other Settings")]
     GameObject _currentItem;
     bool _isPickedUp = false;
-    float _speed = 5f;
+
+    [Header("Gamedesign Settings")]
+    [SerializeField] float _throwForce = 25f;
+    
+
 
     private void Start()
     {
@@ -51,6 +55,9 @@ public class Arm : MonoBehaviour
             {
                 _currentItem = hit.transform.gameObject;
                 _currentItem.GetComponent<Rigidbody>().isKinematic = true;
+
+                SwitchAllCollidersInCurrentItem(_currentItem, false);
+
                 _currentItem.transform.SetParent(this.transform);
                 _currentItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(10f, 0f, 0f));
 
@@ -62,10 +69,23 @@ public class Arm : MonoBehaviour
     private void Drop()
     {
         _currentItem.transform.parent = null;
+
         _currentItem.transform.GetComponent<Rigidbody>().isKinematic = false;
+        _currentItem.GetComponent<Rigidbody>().AddForce(_cameraPosition.transform.forward * _throwForce, ForceMode.Impulse);
+
+        SwitchAllCollidersInCurrentItem(_currentItem, true);
 
         _isPickedUp = false;
         _currentItem = null;
+    }
+
+    private void SwitchAllCollidersInCurrentItem(GameObject currentItem, bool isEnabled)
+    {
+        Collider[] colliders = currentItem.GetComponents<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = isEnabled;
+        }
     }
 
 }
