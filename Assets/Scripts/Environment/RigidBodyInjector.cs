@@ -11,7 +11,10 @@ public class RigidBodyInjector : MonoBehaviour
 
         foreach (Transform child in childrenObjectsArray)
         {
-            child.gameObject.AddComponent<Rigidbody>();
+            if (child.GetComponent<Rigidbody>() == null)
+            {
+                child.gameObject.AddComponent<Rigidbody>();
+            }
         }
     }
 }
