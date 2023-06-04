@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HotOrColdDetector : MonoBehaviour
 {
-    [SerializeField] Image _image; 
+    Image _image; 
     Gift _gift; 
 
     float _minDistance = 0f; 
@@ -16,6 +16,7 @@ public class HotOrColdDetector : MonoBehaviour
 
     private void Start()
     {
+        _image = GetComponent<Image>();
         _gift = FindFirstObjectByType<Gift>();
         _maxDistance = _gift.DistanceToPlayerArm();
 
