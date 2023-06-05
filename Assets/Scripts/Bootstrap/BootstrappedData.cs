@@ -44,7 +44,8 @@ public class BootstrappedData : MonoBehaviour
     string _sceneName;
 
     [Header("Settings")]
-    SettingsData _settingsData;
+    public float volume = 70f; 
+    public float sensivity = 90f;
 
     private void Awake()
     {
@@ -60,20 +61,11 @@ public class BootstrappedData : MonoBehaviour
     }
 
     #region SettingsDataOperations
-    public void InitSettings(SettingsData data)
+    public void SetCameraSettings(float sensivity)
     {
-        _settingsData = data;
+        this.sensivity = sensivity;
     }
 
-    public SettingsData GetSettingsData()
-    { 
-        if(_settingsData == null)
-        {
-            throw new NullReferenceException("BootstrappedData :: GetSettingsData(). SettingsData is null");
-        }
-
-        return _settingsData;
-    }
     #endregion
 
     #region AsyncScenesLoadingOperations

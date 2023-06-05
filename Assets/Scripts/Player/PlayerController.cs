@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [Header("Script References")]
     CharacterController _characterController;
     InputManager _inputManager;
-    SettingsData _bootstrappedSettingsData;
 
     [Header("Developer Settings")]
     Transform _cameraTransform;

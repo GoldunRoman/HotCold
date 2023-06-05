@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class CinemachinePOVExtension : CinemachineExtension
 {
-    [SerializeField] float _horizontalSensivity = 10f;
-    [SerializeField] float _verticalSensivity = 10f;
-    [SerializeField] float _clampAngle = 80f;
-
+    [SerializeField] float _sensivity;
+    [SerializeField] float _clampAngle = 90f;
 
     InputManager _inputManager;
     Vector3 _startingRotation;
@@ -32,8 +30,8 @@ public class CinemachinePOVExtension : CinemachineExtension
             if(stage == CinemachineCore.Stage.Aim)
             {
                 Vector2 deltaInput = _inputManager.GetTouchScreenDelta();
-                _startingRotation.x += deltaInput.x * _verticalSensivity * Time.deltaTime;
-                _startingRotation.y += deltaInput.y * _horizontalSensivity * Time.deltaTime;
+                _startingRotation.x += deltaInput.x * BootstrappedData.Instance.sensivity * Time.deltaTime;
+                _startingRotation.y += deltaInput.y * _sensivity * Time.deltaTime;
                 _startingRotation.y = Mathf.Clamp(_startingRotation.y, -_clampAngle, _clampAngle);
                 state.RawOrientation = Quaternion.Euler(-_startingRotation.y, _startingRotation.x, 0f);
             }
